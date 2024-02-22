@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="/static/styles.css" rel="stylesheet">
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Birthdays</title>
+    <style>
+        /* Custom CSS for additional styling */
+        .form-group {
+            margin-bottom: 20px; /* Add margin to form groups */
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center mb-5 fixed">
+        <h1>Better Birthdays</h1>
+    </div>
+    <!-- Bootstrap alert for flashed messages -->
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} mt-3" role="alert">
+                    {{ message }}<br>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    </div>
+    
+    <div class="container">
+        <div class="section">
+        </div>
+        <div class="section">
+            <h2 class="mb-4">Add a Birthday</h2>
+            <!-- Bootstrap form for adding a birthday -->
+            <form action="/" method="post">
+                <div class="form-row">
+                    <div class="form-group">
+                        <input style="width: 100%;" required name="name" class="form-control" placeholder="Name" type="text">
+                    </div>
+                    <div class="form-group">
+                        <select required id="month" name="month" class="form-control">
+                            <option value="" disabled selected hidden>Month</option>
+                            <option value="1">January (1)</option>    
+                            <option value="2">February (2)</option>
+                            <option value="3">March (3)</option>
+                            <option value="4">April (4)</option>
+                            <option value="5">May (5)</option>
+                            <option value="6">June (6)</option>
+                            <option value="7">July (7)</option>
+                            <option value="8">August (8)</option>
+                            <option value="9">September (9)</option>
+                            <option value="10">October (10)</option>
+                            <option value="11">November (11)</option>
+                            <option value="12">December (12)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input required name="day" class="form-control" placeholder="Day" type="number" min="1" max="31">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Birthday</button>
+            </form>
+            
+        </div>
+
+        <div class="section mt-5">
+            <h2>All Birthdays</h2>
+            <!-- Bootstrap table for displaying birthdays -->
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Birthday</th>
+                            <th>Actions</th>
+                        </tr>                      
+                    </thead>                   
+                    <tbody>
+                        {% for rowEntry in rowEntries %}
+                        <tr>
+                            <td>{{rowEntry.name}}</td>
+                            <td>{{rowEntry.month}}/{{rowEntry.day}}</td>
+                            <td>
+                                <form action="/remove" method="post">
+                                    <input name="id" type="hidden" value="{{rowEntry.id}}">
+                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                </form>
+                                <form action="/edit" method="get">
+                                    <input type="hidden" value="{{rowEntry.id}}" name="id">
+                                    <input type="hidden" value="{{rowEntry.name}}" name="name">
+                                    <input type="hidden" value="{{rowEntry.month}}" name="month">
+                                    <input type="hidden" value="{{rowEntry.day}}" name="day">
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                </form>                           
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional, if needed) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</html>

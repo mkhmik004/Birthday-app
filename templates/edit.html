@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Better Birthdays</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/static/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Edit {{ name }}'s Birthday</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Form for editing a person's birthday -->
+                        <form action="/edit" method="post">
+                            <!-- Input field for name -->
+                            <input type="hidden" name="id" value="{{ id }}">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input style="width: 100%;" required value="{{name}}" name="name" class="form-control" id="name" placeholder="{{value}}" type="text">
+                            </div>
+                            <!-- Dropdown for selecting month -->
+                            <div class="mb-3">
+                                <label for="month" class="form-label">Month</label>
+                                <select required id="month" name="month" class="form-select form-control">
+                                    <option value="{{month}}" disabled hidden></option>
+                                    <option value="1" {% if month == '1' %}selected{% endif %}>January (1)</option>
+                                    <option value="2" {% if month == '2' %}selected{% endif %}>February (2)</option>
+                                    <option value="3" {% if month == '3' %}selected{% endif %}>March (3)</option>
+                                    <option value="4" {% if month == '4' %}selected{% endif %}>April (4)</option>
+                                    <option value="5" {% if month == '5' %}selected{% endif %}>May (5)</option>
+                                    <option value="6" {% if month == '6' %}selected{% endif %}>June (6)</option>
+                                    <option value="7" {% if month == '7' %}selected{% endif %}>July (7)</option>
+                                    <option value="8" {% if month == '8' %}selected{% endif %}>August (8)</option>
+                                    <option value="9" {% if month == '9' %}selected{% endif %}>September (9)</option>
+                                    <option value="10" {% if month == '10' %}selected{% endif %}>October (10)</option>
+                                    <option value="11" {% if month == '11' %}selected{% endif %}>November (11)</option>
+                                    <option value="12" {% if month == '12' %}selected{% endif %}>December (12)</option>
+                                </select>
+                                
+                            </div>
+                            <!-- Input field for day -->
+                            <div class="mb-3">
+                                <label for="day" class="form-label">Day</label>
+                                <input style="width: 100%;" required value="{{day}}" name="day" class="form-control" id="day" placeholder="{{value}}" type="number" min="1" max="31">
+                            </div>
+                            <!-- Button to submit the form -->
+                            <button class="btn btn-primary">Edit Birthday</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
