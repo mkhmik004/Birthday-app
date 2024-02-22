@@ -2,6 +2,9 @@
  The Birthday App simplifies birthday organization. Users can add, edit, and delete entries without login hassles. Session management ensures data privacy. Built with Flask and SQLite, it's easy to install and use. Perfect for maintaining birthdays hassle-free.
 # Birthday App Documentation
 
+![Alt Text](https://raw.githubusercontent.com/mkhmik004/mkhmik004.github.io/main/assets/img/birthdayapp.png)
+
+
 ## Overview
 
 The Birthday App simplifies birthday organization. Users can add, edit, and delete entries without login hassles. Session management ensures data privacy.
